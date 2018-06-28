@@ -1,15 +1,15 @@
 import moment from 'moment';
-import aspirantService from '../services/aspirantService';
+import campaignService from '../services/campaignService';
 
 /**
  * @exports
- * @class aspirantController
+ * @class campaignController
  */
-class aspirantController {
+class campaignController {
   /**
-   * Creates a new aspirant
+   * Creates a new campaign
    * @staticmethod
-   * @param  {object} req - aspirant object
+   * @param  {object} req - campaign object
    * @param {object} res - Response object
    * @return {json} res.json
    */
@@ -17,111 +17,111 @@ class aspirantController {
     const {
       email,
     } = req.body;
-    aspirantService.findAspirantByEmail(email).then((response) => {
+    campaignService.findCampaignByEmail(email).then((response) => {
       const d = new Date();
       const now = moment(d).format('YYYY-MM-DD HH:mm:ss');
       req.body.date = now;
-      req.body.aspirant_id = req.decoded.data;
+      req.body.campaign_id = req.decoded.data;
       console.log(req.decoded.data);
-      aspirantService.saveAspirant(req.body).then((resulter) => {
+      campaignService.saveCampaign(req.body).then((resulter) => {
         return res.status(201).json({
-          message: 'New aspirant created successfully',
+          message: 'New campaign created successfully',
         });
       }).catch((err) => {
         return res.status(500).json({
-          message: 'Error Saving aspirant',
+          message: 'Error Saving campaign',
         });
       });
     }).catch((err) => {
       return res.status(400).json({
-        message: 'Aspirant Already Exists',
+        message: 'Campaign Already Exists',
       });
     });
   }
   /**
-   * Find aspirant by id
+   * Find campaign by id
    * @staticmethod
-   * @param  {object} req - aspirant object
+   * @param  {object} req - campaign object
    * @param {object} res - Response object
    * @return {json} res.json
    */
   static findOne(req, res) {
     const { id } = req.params;
     console.log(id);
-    aspirantService.findAspirantById(id).then((response) => {
+    campaignService.findCampaignById(id).then((response) => {
       return res.status(200).json({
-        message: 'aspirant Found',
+        message: 'Campaign Found',
         data: response.rows,
       });
     }).catch((err) => {
       console.log(err);
       return res.status(400).json({
-        message: 'aspirant Not found',
+        message: 'Campaign Not found',
       });
     });
   }
   /**
-   * Delete aspirant by id
+   * Delete campaign by id
    * @staticmethod
-   * @param  {object} req - aspirant object
+   * @param  {object} req - campaign object
    * @param {object} res - Response object
    * @return {json} res.json
    */
   static deleteOne(req, res) {
     const { id } = req.params;
-    aspirantService.deleteAspirantById(id).then((response) => {
+    campaignService.deleteCampaignById(id).then((response) => {
       return res.status(200).json({
-        message: 'aspirant Deleted',
+        message: 'campaign Deleted',
       });
     }).catch((err) => {
       return res.status(400).json({
-        message: 'Error Deleting aspirant',
+        message: 'Error Deleting campaign',
       });
     });
   }
   /**
-   * Update aspirant by id
+   * Update campaign by id
    * @staticmethod
-   * @param  {object} req - aspirant object
+   * @param  {object} req - campaign object
    * @param {object} res - Response object
    * @return {json} res.json
    */
   static updateOne(req, res) {
-    aspirantService.updateAspirantById(req.body).then((response) => {
+    campaignService.updateCampaignById(req.body).then((response) => {
       return res.status(200).json({
-        message: 'aspirant Updated',
+        message: 'campaign Updated',
         data: response.rows,
       });
     }).catch((err) => {
       return res.status(400).json({
-        message: 'Error Updating aspirant',
+        message: 'Error Updating campaign',
       });
     });
   }
   /**
-   * Get all aspirants
+   * Get all campaigns
    *
    * @staticmethod
-   * @param  {object} req - aspirant object
+   * @param  {object} req - campaign object
    * @param {object} res - Response object
    * @return {json} res.json
    */
   static getAll(req, res) {
     console.log(req.decoded.data);
     const id = req.decoded.data;
-    aspirantService.getAllAspirants(id).then((result) => {
+    campaignService.getAllCampaigns(id).then((result) => {
       return res.status(200).json({
-        message: 'Successfully fetched all users aspirants',
+        message: 'Successfully fetched all users campaigns',
         total: result.rowCount,
         data: result.rows,
       });
     }).catch((e) => {
       console.log(e);
       return res.status(400).json({
-        message: 'Could not fetch all users',
+        message: 'Could not fetch all users campaigns',
       });
     });
   }
 }
 
-export default aspirantController;
+export default campaignController;

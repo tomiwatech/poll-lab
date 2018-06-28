@@ -17,7 +17,7 @@ class UserMiddlewareValidator {
       name, model, description, id, defect,
     } = req.body;
     if (name.trim() === '' || model.trim() === '' || description.trim() === '' || id.trim() === '' || defect.trim() === '') {
-      return res.status(400).json({
+      return res.status(404).json({
         responseCode: '01',
         responseMessage: 'Please fill all fields',
       });

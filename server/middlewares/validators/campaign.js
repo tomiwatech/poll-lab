@@ -2,14 +2,14 @@ import jwt from 'jsonwebtoken';
 import config from '../../config/index';
 /**
  * @exports
- * @class requestMiddleware
+ * @class campaignMiddleware
  */
-class requestMiddleware {
+class campaignMiddleware {
   /**
-     * requestMiddleware
+     * campaignMiddleware
      * Validate POST BODY
      * @staticmethod
-     * @param  {object} req - Request object
+     * @param  {object} req - campaign object
      * @param {object} res - Response object
      * @param {function} next - middleware next (for error handling)
      * @return {json} res.json
@@ -19,17 +19,17 @@ class requestMiddleware {
       firstname, lastname, email, gender, city, fundgoal, state, party, image, position, vision, alias, social
     } = req.body;
     if (firstname.trim() === '' || lastname.trim() === '' || email.trim() === '' || gender.trim() === '' || city.trim() === '' || fundgoal.trim() == null || state.trim() === '' || party.trim() == '' || image.trim() === '' || position.trim() == '' || vision.trim() === '' || alias.trim() == '') {
-      return res.status(400).json({
+      return res.status(404).json({
         message: 'Please fill all fields',
       });
     }
     next();
   }
   /**
-     * requestMiddleware
+     * campaignMiddleware
      * VERIFY TOKEN
      * @staticmethod
-     * @param  {object} req - Request object
+     * @param  {object} req - campaign object
      * @param {object} res - Response object
      * @param {function} next - middleware next (for error handling)
      * @return {json} res.json
@@ -43,9 +43,9 @@ class requestMiddleware {
       // verifies secret and checks exp
       jwt.verify(token, config.userSecret, (err, decoded) => {
         if (err) {
-          return res.status(400).json({ verifyToken: false, message: 'Failed to authenticate token.' });
+          return res.status(403).json({ verifyToken: false, message: 'Failed to authenticate token.' });
         }
-        // if everything is good, save to request for use in other routes
+        // if everything is good, save to campaign for use in other routes
         req.decoded = decoded;
         next();
       });
@@ -59,4 +59,4 @@ class requestMiddleware {
     }
   }
 }
-export default requestMiddleware;
+export default campaignMiddleware;

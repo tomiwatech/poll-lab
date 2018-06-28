@@ -1,0 +1,387 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Poll Application API",
+        "description": "An API for creating polls, fetching polls and performing other poll operations"
+    },
+    "schemes": [
+        "https"
+    ],
+    "host": "poll-backkend.herokuapp.com",
+    "basePath": "/api/v2/",
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Authenticate a user"
+        },
+        {
+            "name": "User",
+            "description": "Operations about user"
+        }
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login the API to get authentication token",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "The email for login",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "The password for login in clear text",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "description": "Returns an authentication token on success.",
+                "responses": {
+                    "200": {
+                        "description": "Authentication Successful, return user details and token",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Please Check Username and Password"
+                    },
+                    "401": {
+                        "description": "This Account has not been verified"
+                    }
+                }
+            }
+        },
+        "/auth/signup": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Create an account for a new user on the API",
+                "description": "Returns success 201 on success.",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "formData",
+                        "description": "The username of the user account to be created",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "The email for the user account to be created",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "The password for the user account to be created",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fullname",
+                        "in": "formData",
+                        "description": "The fullname of the user account to be created",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "New User created successfully",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "User Already Exists"
+                    },
+                    "500": {
+                        "description": "Error Saving User"
+                    }
+                }
+            }
+        },
+        "/users/campaign": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Fetch all the campaigns or aspirants created by a logged in user",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "description": "Returns an object of campaigns on success.",
+                "responses": {
+                    "200": {
+                        "description": "Successfully fetched all users aspirants",
+                        "schema": {
+                            "$ref": "#/definitions/campaigns"
+                        }
+                    },
+                    "403": {
+                        "description": "No token has been provided in the request"
+                    },
+                    "400": {
+                        "description": "Could not fetch all users campaigns"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Create a new campaign",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "firstname",
+                        "in": "formData",
+                        "description": "aspirant's firstname",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lastname",
+                        "in": "formData",
+                        "description": "Aspirant's lastname",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "Aspirant's email",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "gender",
+                        "in": "formData",
+                        "description": "Aspirant's gender",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "city",
+                        "in": "formData",
+                        "description": "Aspirant's city",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "fundgoal",
+                        "in": "formData",
+                        "description": "Aspirant's fund raising goal",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "state",
+                        "in": "formData",
+                        "description": "Aspirant's state",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "party",
+                        "in": "formData",
+                        "description": "Aspirant's political party",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "image",
+                        "in": "formData",
+                        "description": "Aspirant's picture",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "position",
+                        "in": "formData",
+                        "description": "Position aspirant is vieing for",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "vision",
+                        "in": "formData",
+                        "description": "Aspirant's vision",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "alias",
+                        "in": "formData",
+                        "description": "Aspirant's nickname",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "social",
+                        "in": "formData",
+                        "description": "Aspirant's social media links",
+                        "required": true,
+                        "type": "array of strings"
+                    }
+                ],
+                "description": "Returns New campaign created successfully",
+                "responses": {
+                    "201": {
+                        "description": "New campaign created successfully",
+                        "schema": {
+                            "$ref": "#/definitions/campaigns"
+                        }
+                    },
+                    "400": {
+                        "description": "Campaign Already Exists"
+                    },
+                    "404": {
+                        "description": "Please fill all fields"
+                    },
+                    "403": {
+                        "description": "No token has been provided in the request"
+                    },
+                    "500": {
+                        "description": "Error Saving campaign"
+                    }
+                }
+            }
+        },
+        "/users/campaigns/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Fetch campaign for a user by id",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "Authorization token",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The ID of the campaign to be fetched",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "description": "Returns an object of campaign on success.",
+                "responses": {
+                    "200": {
+                        "description": "Campaign found",
+                        "schema": {
+                            "$ref": "#/definitions/campaign"
+                        }
+                    },
+                    "403": {
+                        "description": "No token has been provided in the request"
+                    },
+                    "404": {
+                        "description": "Campaign Not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "fullname": {
+                    "type": "string"
+                }
+            }
+        },
+        "Campaigns": {
+            "type": "object",
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "city": {
+                    "type": "string"
+                },
+                "fundgoal": {
+                    "type": "string"
+                },
+                "state": {
+                    "type": "string"
+                },
+                "party": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "position": {
+                    "type": "string"
+                },
+                "vision": {
+                    "type": "string"
+                },
+                "alias": {
+                    "type": "string"
+                },
+                "social": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

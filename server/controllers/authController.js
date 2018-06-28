@@ -57,7 +57,7 @@ class authController {
       console.log(user.data[0].id);
       console.log(user.data[0].active);
       if (user.data[0].active === false) {
-        return res.status(400).json({
+        return res.status(401).json({
           message: 'This Account has not been verified',
         });
       } else {

@@ -1,6 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
+import swagger from 'swagger-ui-express';
+import swaggerDocument from '../swagger.json';
 import apiVersion1 from './versioning/v1';
 import apiVersion2 from './versioning/v2';
 
@@ -15,6 +17,7 @@ app.use(logger('dev'));
 // api versioning;
 app.use('/api/v1', apiVersion1);
 app.use('/api/v2', apiVersion2);
+app.use('/docs', swagger.serve, swagger.setup(swaggerDocument));
 app.get('/', (req, res) => res.send({ ok: true, message: 'Welcome to Poll Application Backend', baseurl: '/api/{version}' }).status(200));
 app.listen(PORT, () => {
   if (process.env.NODE_ENV === 'dev') {

@@ -4,18 +4,18 @@ const obj = {};
 const err = {};
 /**
  * @exports
- * @class aspirantService
+ * @class campaignService
  */
-class aspirantService {
+class campaignService {
   /**
-   * Find aspirant by equipment
+   * Find campaign by equipment
    * @staticmethod
-   * @param  {string} serial_number - aspirant object
+   * @param  {string} serial_number - campaign object
    * @return {string} res
    */
-  static findAspirantByEmail(email) {
+  static findCampaignByEmail(email) {
     return new Promise((resolve, reject) => {
-      const query = `SELECT id, aspirant_id, firstname FROM aspirants WHERE email = '${email}'`;
+      const query = `SELECT id, campaign_id, firstname FROM aspirants WHERE email = '${email}'`;
       db.query(query).then((result) => {
         // console.log(result);
         if (result.rowCount === 0) {
@@ -36,12 +36,12 @@ class aspirantService {
     });
   }
   /**
-   * Find aspirant by id
+   * Find campaign by id
    * @staticmethod
-   * @param  {string} id - aspirant object
+   * @param  {string} id - campaign object
    * @return {string} res
    */
-  static findAspirantById(id) {
+  static findCampaignById(id) {
     return new Promise((resolve, reject) => {
       const query = `SELECT firstname, lastname, email, gender, fundgoal, party, position, vision FROM aspirants WHERE id = '${id}'`;
       db.query(query).then((result) => {
@@ -63,14 +63,14 @@ class aspirantService {
 
   }
   /**
-   * delete aspirant by id
+   * delete campaign by id
    * @staticmethod
-   * @param  {string} id - aspirant object
+   * @param  {string} id - campaign object
    * @return {string} res
    */
-  static deleteAspirantById(id) {
+  static deleteCampaignById(id) {
     return new Promise((resolve, reject) => {
-      const query = `DELETE FROM aspirants WHERE id = '${id}'`;
+      const query = `DELETE FROM campaigns WHERE id = '${id}'`;
       db.query(query).then((result) => {
         if (result.rowCount === 0) {
           err.rowCount = 0;
@@ -89,17 +89,17 @@ class aspirantService {
     });
   }
   /**
- * update aspirant by body
+ * update campaign by body
  * @staticmethod
- * @param  {string} body - aspirant object
+ * @param  {string} body - campaign object
  * @return {string} res
  */
-  static updateAspirantById(body) {
+  static updateCampaignById(body) {
     const {
-      id, aspiranttype, equipment, model, description, now, approve, disapprove, resolvve,
+      id, campaigntype, equipment, model, description, now, approve, disapprove, resolvve,
     } = body;
     return new Promise((resolve, reject) => {
-      const query = `UPDATE aspirants SET aspiranttype = '${aspiranttype}', equipment = '${equipment}' ,  model = '${model}',  description = '${description}',  created_on = '${now}',  approve = '${approve}',  disapprove = '${disapprove}',  resolve = '${resolvve}'  WHERE id = '${id}'`;
+      const query = `UPDATE campaigns SET campaigntype = '${campaigntype}', equipment = '${equipment}' ,  model = '${model}',  description = '${description}',  created_on = '${now}',  approve = '${approve}',  disapprove = '${disapprove}',  resolve = '${resolvve}'  WHERE id = '${id}'`;
       db.query(query).then((result) => {
         if (result.rowCount === 0) {
           err.rowCount = 0;
@@ -119,20 +119,20 @@ class aspirantService {
   }
 
   /**
-   * save new aspirants
+   * save new campaigns
    * @staticmethod
-   * @param  {string} body - aspirant object
+   * @param  {string} body - campaign object
    * @return {string} res
    */
-  static saveAspirant(body) {
+  static saveCampaign(body) {
     const {
-      aspirant_id, firstname, lastname, email, gender, date, city, fundgoal, state, party, image, position, vision, alias, social
+      campaign_id, firstname, lastname, email, gender, date, city, fundgoal, state, party, image, position, vision, alias, social
     } = body;
     return new Promise((resolve, reject) => {
-      const queryBody = `INSERT INTO aspirants 
-                         (aspirant_id, firstname, lastname, email, gender, date, city, fundgoal, state, party, image, position, vision, alias, social) 
+      const queryBody = `INSERT INTO campaigns 
+                         (campaign_id, firstname, lastname, email, gender, date, city, fundgoal, state, party, image, position, vision, alias, social) 
                          VALUES 
-                         ('${aspirant_id}', '${firstname}', '${lastname}', '${email}','${gender}','${date}','${city}','${fundgoal}','${state}','${party}','${image}','${position}','${vision}','${alias}','${social}')`;
+                         ('${campaign_id}', '${firstname}', '${lastname}', '${email}','${gender}','${date}','${city}','${fundgoal}','${state}','${party}','${image}','${position}','${vision}','${alias}','${social}')`;
       db.query(queryBody).then((result) => {
         if (result.rowCount >= 1) {
           resolve('Data Saved');
@@ -141,19 +141,19 @@ class aspirantService {
         }
       }).catch((e) => {
         console.log(e);
-        reject(new Error('Could not save aspirant'));
+        reject(new Error('Could not save campaign'));
       });
     });
   }
   /**
-   * Get all aspirants
+   * Get all campaigns
    * @staticmethod
    * @param  {string} id
    * @return {string} res
    */
-  static getAllAspirants(id) {
+  static getAllCampaigns(id) {
     return new Promise((resolve, reject) => {
-      const query = `SELECT * FROM aspirants where aspirant_id = '${id}'`;
+      const query = `SELECT * FROM campaigns where campaign_id = '${id}'`;
       db.query(query).then((result) => {
         if (result.rowCount === 0) {
           err.rowCount = 0;
@@ -173,11 +173,11 @@ class aspirantService {
   }
 }
 
-export default aspirantService;
+export default campaignService;
 
-// CREATE TABLE aspirants(
+// CREATE TABLE campaigns(
 //   id bigserial PRIMARY KEY,
-//   aspirant_id serial NOT NULL,
+//   campaign_id serial NOT NULL,
 //   firstname VARCHAR (255) NOT NULL,
 //   lastname VARCHAR (255) NOT NULL,
 //   email VARCHAR (255) UNIQUE NOT NULL,

@@ -17,7 +17,7 @@ class authMiddleware {
       username, password, email, fullname,
     } = req.body;
     if (username.trim() === '' || password.trim() === '' || email.trim() === '' || fullname.trim() === '') {
-      return res.status(400).json({
+      return res.status(404).json({
         responseCode: '01',
         responseMessage: 'Please fill all fields',
       });
@@ -36,7 +36,7 @@ class authMiddleware {
   static validateLogin(req, res, next) {
     const { username, password } = req.body;
     if (username.trim() === '' || password.trim() === '') {
-      return res.status(400).json({
+      return res.status(404).json({
         responseCode: '01',
         responseMessage: 'Please fill all fields',
       });

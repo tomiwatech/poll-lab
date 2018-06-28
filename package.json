@@ -36,7 +36,8 @@
     "istanbul": "^0.4.5",
     "mocha": "^5.1.1",
     "nyc": "^11.7.3",
-    "randomstring": "^1.1.5"
+    "randomstring": "^1.1.5",
+    "swagger-ui-express": "^3.0.10"
   },
   "dependencies": {
     "babel-core": "^6.26.3",

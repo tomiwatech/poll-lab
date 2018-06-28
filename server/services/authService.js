@@ -140,7 +140,7 @@ class authService {
 
     console.log('secretToken', secretToken);
 
-    const link = "http://" + host + "/api/v2/auth/verify/" + secretToken;
+    const link = "https://" + host + "/api/v2/auth/verify/" + secretToken;
 
     console.log(link);
 

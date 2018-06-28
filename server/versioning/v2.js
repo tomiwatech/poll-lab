@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import admin from '../routes/admin';
-import user from '../routes/aspirants';
+import user from '../routes/campaigns';
 import auth from '../routes/auth';
 
 const api = Router();
