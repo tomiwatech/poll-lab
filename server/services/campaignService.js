@@ -70,7 +70,7 @@ class campaignService {
    */
   static deleteCampaignById(id) {
     return new Promise((resolve, reject) => {
-      const query = `DELETE FROM campaigns WHERE id = '${id}'`;
+      const query = `DELETE FROM aspirants WHERE id = '${id}'`;
       db.query(query).then((result) => {
         if (result.rowCount === 0) {
           err.rowCount = 0;
@@ -129,7 +129,7 @@ class campaignService {
       campaign_id, firstname, lastname, email, gender, date, city, fundgoal, state, party, image, position, vision, alias, social
     } = body;
     return new Promise((resolve, reject) => {
-      const queryBody = `INSERT INTO campaigns 
+      const queryBody = `INSERT INTO aspirants 
                          (campaign_id, firstname, lastname, email, gender, date, city, fundgoal, state, party, image, position, vision, alias, social) 
                          VALUES 
                          ('${campaign_id}', '${firstname}', '${lastname}', '${email}','${gender}','${date}','${city}','${fundgoal}','${state}','${party}','${image}','${position}','${vision}','${alias}','${social}')`;
@@ -153,7 +153,7 @@ class campaignService {
    */
   static getAllCampaigns(id) {
     return new Promise((resolve, reject) => {
-      const query = `SELECT * FROM campaigns where campaign_id = '${id}'`;
+      const query = `SELECT * FROM aspirants where aspirant_id = '${id}'`;
       db.query(query).then((result) => {
         if (result.rowCount === 0) {
           err.rowCount = 0;

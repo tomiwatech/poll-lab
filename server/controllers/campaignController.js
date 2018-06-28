@@ -71,11 +71,11 @@ class campaignController {
     const { id } = req.params;
     campaignService.deleteCampaignById(id).then((response) => {
       return res.status(200).json({
-        message: 'campaign Deleted',
+        message: 'Campaign Deleted',
       });
     }).catch((err) => {
       return res.status(400).json({
-        message: 'Error Deleting campaign',
+        message: 'Error Deleting Campaign',
       });
     });
   }
