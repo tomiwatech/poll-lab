@@ -174,22 +174,3 @@ class campaignService {
 }
 
 export default campaignService;
-
-// CREATE TABLE campaigns(
-//   id bigserial PRIMARY KEY,
-//   campaign_id serial NOT NULL,
-//   firstname VARCHAR (255) NOT NULL,
-//   lastname VARCHAR (255) NOT NULL,
-//   email VARCHAR (255) UNIQUE NOT NULL,
-//   gender VARCHAR (255) NOT NULL,
-//   date VARCHAR (255) NOT NULL,
-//   city VARCHAR (255) NOT NULL,
-//   fundgoal VARCHAR (255) NOT NULL,
-//   state VARCHAR (255) UNIQUE NOT NULL,
-//   party VARCHAR (255) NOT NULL,
-//   image VARCHAR (255) NOT NULL,
-//   position VARCHAR (255) NOT NULL,
-//   vision VARCHAR (255) NOT NULL,
-//   alias VARCHAR (255) NOT NULL,
-//   social text[] NOT NULL
-//  );

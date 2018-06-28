@@ -203,16 +203,3 @@ class authService {
 }
 
 export default authService;
-
-
-// CREATE TABLE users(
-//   id bigserial PRIMARY KEY,
-//   username VARCHAR (255) NOT NULL,
-//   password VARCHAR (255) NOT NULL,
-//   email VARCHAR (255) UNIQUE NOT NULL,
-//   created_on TIMESTAMP NOT NULL,
-//   fullname VARCHAR (255) NOT NULL,
-//   role VARCHAR (255) NOT NULL,
-//   secretToken VARCHAR (255) NOT NULL,
-//   active BOOLEAN NOT NULL
-//  );
