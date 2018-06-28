@@ -4,18 +4,18 @@ const obj = {};
 const err = {};
 /**
  * @exports
- * @class endorsementService
+ * @class donationService
  */
-class endorsementService {
+class donationService {
     /**
-     * Find endorsement by equipment
+     * Find donation by equipment
      * @staticmethod
-     * @param  {string} serial_number - endorsement object
+     * @param  {string} serial_number - donation object
      * @return {string} res
      */
-    static findEndorsement(endorsement) {
+    static finddonation(donation) {
         return new Promise((resolve, reject) => {
-            const query = `SELECT id, endorsement , username, endorsement_id FROM endorsements WHERE endorsement = '${endorsement}'`;
+            const query = `SELECT id, donation , username, donation_id FROM donations WHERE donation = '${donation}'`;
             db.query(query).then((result) => {
                 // console.log(result);
                 if (result.rowCount === 0) {
@@ -36,14 +36,14 @@ class endorsementService {
         });
     }
     /**
-     * Find endorsement by id
+     * Find donation by id
      * @staticmethod
-     * @param  {string} id - endorsement object
+     * @param  {string} id - donation object
      * @return {string} res
      */
-    static findEndorsementById(id) {
+    static finddonationById(id) {
         return new Promise((resolve, reject) => {
-            const query = `SELECT id,endorsement,username,endorsement_id FROM endorsements WHERE id = '${id}'`;
+            const query = `SELECT id,donation,username,donation_id FROM donations WHERE id = '${id}'`;
             db.query(query).then((result) => {
                 if (result.rowCount === 0) {
                     err.rowCount = 0;
@@ -63,14 +63,14 @@ class endorsementService {
 
     }
     /**
-     * delete endorsement by id
+     * delete donation by id
      * @staticmethod
-     * @param  {string} id - endorsement object
+     * @param  {string} id - donation object
      * @return {string} res
      */
-    static deleteEndorsementById(id) {
+    static deletedonationById(id) {
         return new Promise((resolve, reject) => {
-            const query = `DELETE FROM endorsements WHERE id = '${id}'`;
+            const query = `DELETE FROM donations WHERE id = '${id}'`;
             db.query(query).then((result) => {
                 if (result.rowCount === 0) {
                     err.rowCount = 0;
@@ -89,17 +89,17 @@ class endorsementService {
         });
     }
     /**
-   * update endorsement by body
+   * update donation by body
    * @staticmethod
-   * @param  {string} body - endorsement object
+   * @param  {string} body - donation object
    * @return {string} res
    */
-    static updateEndorsementById(body) {
+    static updatedonationById(body) {
         const {
-      id, endorsementtype, equipment, model, description, now, approve, disapprove, resolvve,
+      id, donationtype, equipment, model, description, now, approve, disapprove, resolvve,
     } = body;
         return new Promise((resolve, reject) => {
-            const query = `UPDATE endorsements SET endorsementtype = '${endorsementtype}', equipment = '${equipment}' ,  model = '${model}',  description = '${description}',  created_on = '${now}',  approve = '${approve}',  disapprove = '${disapprove}',  resolve = '${resolvve}'  WHERE id = '${id}'`;
+            const query = `UPDATE donations SET donationtype = '${donationtype}', equipment = '${equipment}' ,  model = '${model}',  description = '${description}',  created_on = '${now}',  approve = '${approve}',  disapprove = '${disapprove}',  resolve = '${resolvve}'  WHERE id = '${id}'`;
             db.query(query).then((result) => {
                 if (result.rowCount === 0) {
                     err.rowCount = 0;
@@ -119,20 +119,20 @@ class endorsementService {
     }
 
     /**
-     * save new endorsements
+     * save new donations
      * @staticmethod
-     * @param  {string} body - endorsement object
+     * @param  {string} body - donation object
      * @return {string} res
      */
-    static saveEndorsement(body) {
+    static savedonation(body) {
         const {
-      endorsement, username, date, endorsement_id
+      donation, username, date, donation_id
     } = body;
         return new Promise((resolve, reject) => {
-            const queryBody =  `INSERT INTO endorsements
-                                (endorsement, username, date, endorsement_id) 
-                                VALUES 
-                                ('${endorsement}', '${username}', '${date}', '${endorsement_id}')`;
+            const queryBody = `INSERT INTO donations
+                         (donation, username, date, donation_id) 
+                         VALUES 
+                         ('${donation}', '${username}', '${date}', '${donation_id}')`;
             db.query(queryBody).then((result) => {
                 if (result.rowCount >= 1) {
                     resolve('Data Saved');
@@ -141,19 +141,19 @@ class endorsementService {
                 }
             }).catch((e) => {
                 console.log(e);
-                reject(new Error('Could not save endorsement'));
+                reject(new Error('Could not save donation'));
             });
         });
     }
     /**
-     * Get all endorsements
+     * Get all donations
      * @staticmethod
      * @param  {string} id
      * @return {string} res
      */
-    static getAllEndorsements(id) {
+    static getAlldonations(id) {
         return new Promise((resolve, reject) => {
-            const query = `SELECT * FROM endorsements where endorsement_id = '${id}'`;
+            const query = `SELECT * FROM donations where donation_id = '${id}'`;
             db.query(query).then((result) => {
                 if (result.rowCount === 0) {
                     err.rowCount = 0;
@@ -173,4 +173,4 @@ class endorsementService {
     }
 }
 
-export default endorsementService;
+export default donationService;

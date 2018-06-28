@@ -5,15 +5,15 @@ import config from '../../config/index';
  * @class adminMiddleware
  */
 class adminMiddleware {
-/**
- * adminMiddleware
- * Verify TOKEN
- * @staticmethod
- * @param  {object} req - Request object
- * @param {object} res - Response object
- * @param {function} next - middleware next (for error handling)
- * @return {json} res.json
- */
+  /**
+   * adminMiddleware
+   * Verify TOKEN
+   * @staticmethod
+   * @param  {object} req - Request object
+   * @param {object} res - Response object
+   * @param {function} next - middleware next (for error handling)
+   * @return {json} res.json
+   */
   static verifyToken(req, res, next) {
     // check header or url parameters or post parameters for token
     const token = req.body.token || req.headers['x-access-token'];
