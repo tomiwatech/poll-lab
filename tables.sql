@@ -28,5 +28,14 @@ CREATE TABLE users(
   position VARCHAR (255) NOT NULL,
   vision VARCHAR (255) NOT NULL,
   alias VARCHAR (255) NOT NULL,
-  social text[] NOT NULL
+  social text NOT NULL
  );
+
+  CREATE TABLE endorsements(
+  id bigserial PRIMARY KEY,
+  endorsement VARCHAR (255) NOT NULL,
+  username VARCHAR (255) NOT NULL,
+  date VARCHAR (255) NOT NULL,
+  endorsement_id serial NOT NULL
+ );
+

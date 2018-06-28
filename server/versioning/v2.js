@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import admin from '../routes/admin';
 import user from '../routes/campaigns';
+import endorsements from '../routes/endorsement';
 import auth from '../routes/auth';
 
 const api = Router();
@@ -8,6 +9,7 @@ const api = Router();
 api.get('/', (req, res) => res.send({ ok: true, message: 'Welcome to OnePercentLab', status: 'API version 2' }));
 api.use('/auth', auth);
 api.use('/users', user);
+api.use('/users/endorsements', endorsements);
 api.use('/requests', admin);
 api.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
