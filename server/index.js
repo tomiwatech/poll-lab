@@ -15,7 +15,7 @@ app.use(logger('dev'));
 // api versioning;
 app.use('/api/v1', apiVersion1);
 app.use('/api/v2', apiVersion2);
-app.get('/', (req, res) => res.send({ ok: true, message: 'Welcome to Maintenance Tracker', baseurl: '/api/{version}' }).status(200));
+app.get('/', (req, res) => res.send({ ok: true, message: 'Welcome to Poll Application Backend', baseurl: '/api/{version}' }).status(200));
 app.listen(PORT, () => {
   if (process.env.NODE_ENV === 'dev') {
     console.log(`The Dev server is running on port ${PORT}`);
